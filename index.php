@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['input'])) {
         } else {
             $hasil = @eval("return $ekspresi;");
             if ($hasil !== false && $hasil !== null) {
-                // Hanya INSERT ke database jika tidak ada error
                 $sql = "INSERT INTO history (operasi, hasil) VALUES ('" . mysqli_real_escape_string($conn, $_POST['input']) . "', '$hasil')";
                 mysqli_query($conn, $sql);
                 $ekspresi = $hasil;
@@ -227,7 +226,6 @@ $history = mysqli_query($conn, "SELECT * FROM history ORDER BY id DESC LIMIT 10"
             let value = input.value;
             let lastChar = value.slice(-1);
 
-            // Tetap langsung nambah √ tanpa *
             input.value += '√';
             display.innerText = input.value;
             isResultDisplayed = false;
